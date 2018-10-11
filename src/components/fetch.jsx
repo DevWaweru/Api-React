@@ -29,7 +29,7 @@ class FetchMovies extends Component {
         <div className="container-fluid">
           <div className="row">
             {movies.map(item => (
-              <div className="col-md-3 p-0" key={item.id}>
+              <div className="col-md-3 p-0 select-movie" key={item.id}>
                 <Link to={`/movie/${item.id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} className="movie-poster" />
                 </Link>

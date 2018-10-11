@@ -6,28 +6,35 @@ import { getMovies } from "./services/movieService";
 import './App.css';
 
 class App extends Component {
-  state = {
-    isLoaded: false,
-    movies: [],
-    currentPage: 2,
-  };
+  state = { isLoaded: false, movies: [], currentPage: 2 };
+
   async componentDidMount() {
     const { data } = await getMovies();
+    console.log(data);
     this.setState({ isLoaded: true, movies: data.results });
   }
+
   getMoreMovies = async() => {
     const { currentPage, movies: moviesData } = this.state;
     const { data } = await getMovies(currentPage);
     const movies = [...moviesData, ...data.results];
     this.setState({ movies, currentPage: currentPage+1 });
   }
+
+  getSingleMovie = (movieId = "111") => {    
+    const { movies } = this.state;    
+    const movie = movies.filter(m => m.id.toString() === movieId);
+    console.log(movie);        
+    return movie;
+  }
+
   render() {
     const { movies, isLoaded } = this.state;
     return (
       <React.Fragment>
         <main className='container-fluid p-0'>
           <Switch>
-            <Route path='/movie/:id' component={Movie} />
+            <Route path='/movie/:id' render={props => <Movie {...props} movie={this.getSingleMovie} />}  />
             <Route exact path='/' render={props => <FetchMovies {...props} movies={movies} isLoaded={isLoaded} onGetMore={this.getMoreMovies} />}/>
           </Switch>
         </main>

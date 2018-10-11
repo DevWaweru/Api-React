@@ -4,6 +4,8 @@ body {
   font-family: sans-serif;
 }
 
+@import "https://fonts.googleapis.com/css?family=Allura";
+
 .centered {
   position: absolute;
   margin: auto;
@@ -40,4 +42,83 @@ body {
 
 button.btn.btn-primary {
   border-radius: 5rem;
+}
+
+.backdrop-responsive {
+  width: 100%;
+}
+
+.poster-responsive {
+  display: none;
+}
+
+.poster {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: #00000091;
+}
+
+h1.poster-text {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  font-family: 'Allura', cursive;
+  font-size: 8rem;
+}
+
+.movie-info {
+  border-right: 1px solid #8080806e;
+}
+
+.select-movie img:hover {
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.select-movie img {
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  z-index: 1;
+  opacity: 1;
+}
+
+.select-movie {
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  border-top: transparent;
+}
+
+@media(max-width: 768px) {
+  .poster-responsive {
+    width: 100%;
+    display: block;
+  }
+
+  .backdrop-responsive {
+    display: none;
+  }
+
+  .movie-info {
+    border-right: transparent;
+    border-bottom: 1px solid #8080806e;
+  }
 }
