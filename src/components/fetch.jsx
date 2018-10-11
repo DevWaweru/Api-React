@@ -25,7 +25,6 @@ class FetchMovies extends Component {
       );
     } else {
       return (
-
         <div className="container-fluid">
           <div className="row">
             {movies.map(item => (
@@ -39,7 +38,7 @@ class FetchMovies extends Component {
               <button onClick={onGetMore} className="btn btn-primary">+</button>
             </div>
           </div>
-        </div> //{item.title} | {item.vote_average} | {item.overview} this.posterPath(item.poster_path)
+        </div>
       );
     }
   }
