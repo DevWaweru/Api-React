@@ -1,26 +1,10 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/movieService";
-import './fetch.css';
+import { Link } from 'react-router-dom';
 
 class FetchMovies extends Component {
-  state = {
-    isLoaded: false,
-    movies: [],
-    currentPage: 2,
-  };
-  async componentDidMount() {
-    const { data } = await getMovies();
-    this.setState({ isLoaded: true, movies: data.results });
-  }
-  getMoreMovies = async() => {
-    const { currentPage, movies: moviesData } = this.state;
-    const { data } = await getMovies(currentPage);
-    const movies = [...moviesData, ...data.results];
-    this.setState({ movies, currentPage: currentPage+1 });
-  }
 
   render() {
-    var { isLoaded, movies } = this.state;
+    var { isLoaded, movies, onGetMore } = this.props;
     if (!isLoaded) {
       return (
         <div
@@ -41,17 +25,18 @@ class FetchMovies extends Component {
       );
     } else {
       return (
+
         <div className="container-fluid">
           <div className="row">
             {movies.map(item => (
               <div className="col-md-3 p-0" key={item.id}>
-                <a href="#">
+                <Link to={`/movie/${item.id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} className="movie-poster" />
-                </a>
+                </Link>
               </div>
             ))}
             <div className="col-md-12 p-0 add-more">
-              <button onClick={this.getMoreMovies} className="btn btn-primary">+</button>
+              <button onClick={onGetMore} className="btn btn-primary">+</button>
             </div>
           </div>
         </div> //{item.title} | {item.vote_average} | {item.overview} this.posterPath(item.poster_path)
